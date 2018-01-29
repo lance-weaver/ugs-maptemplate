@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Calcite Bootstrap -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-bootstrap.min-v0.2.css">
+
+  <!-- Calcite Maps -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.2.css">
+
+  <!-- ArcGIS JS 4.0 -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 50px;
+      height: 100%;
+      width:50%;
+    }
+
+    /* put any project specific css here!  */
+
+  </style>
+
+  <script>
+
+        // toggle
+    $( "#testing" ).click(function() {
+          console.log("clicked");
+
+    });
+
+  </script>
+
+</head>
+<body>
+
+
+<button id="testing">Test 1</button>
+
+
+
+<div class="container">
+  <h2>Panel Container</h2>
+
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Panel Heading</div>
+    <div class="panel-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.....
+    </div>
+  </div>
+
+
+
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.....
+      </div>
+      <div class="panel-footer">Panel Footer</div>
+    </div>
+  </div>
+
+</div>
+
+    <!-- dojo bootstrap accordion example -->
+<div class="panel-group" id="accordion2">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" >Collapsible Group Item #1</a></h4></div>
+        <div id="collapseOne" class="panel-collapse collapse in"  style="height: auto;">
+            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" >Collapsible Group Item #2</a></h4></div>
+        <div id="collapseTwo" class="panel-collapse collapse"  style="height: 0px;">
+            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+                put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim k.</div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#collapseThree" >Collapsible Group Item #3</a></h4></div>
+        <div id="collapseThree" class="panel-collapse collapse"  style="height: 0px;">
+            <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+                put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim .</div>
+        </div>
+    </div>
+</div>
+
+    <!--
+
+
+    Calcite Panels note.
+    -it has to have an id on the outermost div, so the menu button can show it.
+
+    -I don't think it needs a heading div.  It only exists so that the body's  aria-labelledby has a reference... which help screen readers work better.
+
+    -The href="#collapseDivname" is essential... it won't collapse without it (but it could be data-target instead!?)
+
+    -Also the data-target="#panelLegend" is essential, the close button won't work without it
+
+    -The aria-controls="collapseLegend" is also just for screen readers... (it is optional)
+
+    -The aria-labelledby="headingLegend" is also just for screen readers... (it is optional)
+
+
+    SUMMARY OF POSSIBLE changes
+    -delete the id="HeadingLegend" and the aria-labelledby="headingLegend"
+    -delete the aria-controls="collapseLegend" and aria-labelledby="headingLegend"
+    -change href= to data-target=
+
+
+
+    -->
+
+
+
+<div class="calcite-panels calcite-panels-right calcite-bgcolor-dark panel-group undefined calcite-text-light calcite-bg-custom calcite-bgcolor-blue-75" role="tablist" aria-multiselectable="true">
+
+<button data-toggle="collapse" data-target="#panelLegend">Collapse panel</button>
+
+
+    <!-- legend panel -->
+    <div id="panelLegend" class="panel collapse in">
+        <div class="panel-heading" role="tab">
+          <div class="panel-title">
+            <a class="panel-toggle" role="button" data-toggle="collapse" data-target="#collapseLegend"  aria-expanded="true"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><span class="panel-label">Legend</span></a>
+            <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLegend"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <div id="collapseLegend" class="panel-collapse collapse in" role="tabpanel">
+          <div class="panel-body">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.....
+
+          </div>
+        </div>
+    </div>
+
+
+    <!-- layers panel -->
+    <div id="panelLayers" class="panel collapse in">
+        <div id="headingLayers" class="panel-heading" role="tab">
+          <div class="panel-title">
+            <a class="panel-toggle" role="button" data-toggle="collapse" data-target="#collapseLayers"  aria-expanded="true" aria-controls="collapseLayers"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="panel-label">Layer Visibility</span></a>
+            <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLayers"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <div id="collapseLayers" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingLayers">
+          <div class="panel-body">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.....
+
+          </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script type="text/javascript">
+  var dojoConfig = {
+    packages: [{
+      name: "bootstrap",
+      location: "https://esri.github.io/calcite-maps/dist/vendor/dojo-bootstrap"
+    },
+    {
+      name: "calcite-maps",
+      location: "https://esri.github.io/calcite-maps/dist/js/dojo"
+    }]
+  };
+</script>
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+-->
+
+
+
+</body>
+</html>

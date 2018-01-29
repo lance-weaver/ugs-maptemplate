@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="description" content="Calcite Maps Demo - ArcGIS">
+  <meta http-equiv="refresh" content="url=index.html">
+
+  <title>UGS Calcite Template</title>
+
+  <!-- Calcite Bootstrap -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-bootstrap.min-v0.2.css">
+
+  <!-- Calcite Maps -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.2.css">
+
+  <!-- ArcGIS JS 4.0 -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
+
+  <!-- Boilerplate Template Syle sheet -->
+  <link rel="stylesheet" href="/apps/_ugsmaptemplate/template.css">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    /* put any project specific css here!  */
+
+  </style>
+
+</head>
+
+<body class="calcite-maps calcite-nav-top">
+<a class="ugs-watermark " href="https://geology.utah.gov"></a>
+
+  <!-- Navbar -->
+  <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark">
+    <!-- Menu -->
+    <div class="dropdown calcite-dropdown calcite-bg-light calcite-text-dark" role="presentation">
+      <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <div class="calcite-dropdown-toggle">
+          <span class="sr-only">Toggle dropdown menu</span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a id="mapNavMbl" class="hidden-md hidden-lg" href="#2dTab" aria-controls="2Dtab" role="tab" data-toggle="tab"> Map</a></li>
+        <li><a id="sceneNavMbl" class="active hidden-md hidden-lg" href="#3dTab" aria-controls="3Dtab" role="tab" data-toggle="tab"> Scene</a></li>
+        <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
+        <li><a role="button" data-target="#panelLegend" aria-haspopup="true"><span class="glyphicon glyphicon-list-alt"></span> Legend</a></li>
+        <li><a role="button" data-target="#panelLayers" aria-haspopup="true"><span class="glyphicon glyphicon-list"></span> Layers</a></li>
+        <li><a role="button" data-target="#panelOpacity" aria-haspopup="true"><span class="glyphicon glyphicon-adjust"></span> Layer Opacity</a></li>
+        <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
+		<li><a role="button" data-target="#panelResults" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Results</a></li>
+		<li><a role="button" data-target="#panelSettings" aria-haspopup="true"><span class="glyphicon glyphicon-cog"></span> Map Theme</a></li>
+        <li><a role="button" id="calciteLocate" aria-haspopup="true"><span class="glyphicon glyphicon-map-marker"></span> Locate</a></li>
+        <li><a role="button" data-target="#panelShare" aria-haspopup="true"><span class="glyphicon glyphicon-share"></span> Share</a></li>
+        <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span> Full Map</a></li>
+      </ul>
+    </div>
+    <!-- Title -->
+    <div class="calcite-title calcite-overflow-hidden">
+      <!-- <div id="logo"><a href="https://geology.utah.gov"><img src="https://geology.utah.gov/apps/wetlands/logo.png" style="width:34px"></a></div>  -->
+      <span class="calcite-title-main"><a href="https://geology.utah.gov">Utah Geological Survey</a></span>
+      <span class="calcite-title-divider hidden-xs"></span>
+      <span class="calcite-title-sub hidden-xs" id="subTitle"> </span>
+    </div>
+     <!-- Nav -->
+    <ul class="calcite-nav nav navbar-nav">
+      <li><a id="mapNav" class="hidden-xs hidden-sm" href="#2dTab" aria-controls="2Dtab" aria-expanded="true" role="tab" data-toggle="tab" data-tooltip="tip" title="2D View" data-placement="bottom">2D Map</a></li>
+      <li class="active"><a id="sceneNav" class="hidden-xs hidden-sm" href="#3dTab" aria-controls="3Dtab" role="tab" data-toggle="tab" data-tooltip="tip" title="3D View" data-placement="bottom">3D Map</a></li>
+      <li><div class="calcite-navbar-search calcite-search-expander"><div id="searchNavDiv"></div></div></li>
+    </ul>
+  </nav><!--/.navbar -->
+
+  <!-- Map Container  -->
+
+  <div class="calcite-map calcite-map-absolute">
+    <div id="tabContainer" class="tab-content">
+      <div id="2dTab" class="tab-pane fade" role="tabpanel">
+         <div id="mapViewDiv"></div>
+      </div>
+      <div id="3dTab" class="tab-pane fade" role="tabpanel">
+        <div id="sceneViewDiv"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel Container -->
+
+  <div class="calcite-panels calcite-panels-right calcite-bg-custom calcite-text-light calcite-bgcolor-dark panel-group" role="tablist" aria-multiselectable="true">
+
+    <!-- Info Panel -->
+
+    <div id="panelInfo" class="panel collapse">
+      <div id="headingInfo" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo"  aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+        <div class="panel-body">
+          <p>The main styles used in this app are:</p>
+          Body
+          <li>calcite-nav-top</li>
+          <br>
+          Nav
+          <li>calcite-bgcolor-dark-blue</li>
+          <li>calcite-text-light</li>
+          <br>
+          Dropdown
+          <li>calcite-menu-drawer</li>
+          <br>
+          Panels
+          <li>calcite-panels-right</li>
+          <li>calcite-bg-custom</li>
+
+          <p>The main styles used in this app are:</p>
+          Body
+          <li>calcite-nav-top</li>
+          <br>
+          Nav
+          <li>calcite-bgcolor-dark-blue</li>
+          <li>calcite-text-light</li>
+          <br>
+          Dropdown
+          <li>calcite-menu-drawer</li>
+          <br>
+          Panels
+          <li>calcite-panels-right</li>
+          <li>calcite-bg-custom</li>
+
+          <p>The main styles used in this app are:</p>
+          Body
+          <li>calcite-nav-top</li>
+          <br>
+          Nav
+          <li>calcite-bgcolor-dark-blue</li>
+          <li>calcite-text-light</li>
+          <br>
+          Dropdown
+          <li>calcite-menu-drawer</li>
+          <br>
+          Panels
+          <li>calcite-panels-right</li>
+          <li>calcite-bg-custom</li>
+        </div>
+     </div>
+    </div>
+
+    <!-- legend panel -->
+    <div id="panelLegend" class="panel collapse">
+    <div id="headingLegend" class="panel-heading" role="tab">
+      <div class="panel-title">
+        <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseLegend"  aria-expanded="true" aria-controls="collapseLegend"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><span class="panel-label">Legend</span></a>
+        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLegend"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+      </div>
+    </div>
+    <div id="collapseLegend" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLegend">
+      <div class="panel-body">
+
+			<div id="legendDiv"></div>
+
+      </div>
+    </div>
+    </div>
+
+
+    <!-- layers panel -->
+    <div id="panelLayers" class="panel collapse">
+    <div id="headingLayers" class="panel-heading" role="tab">
+      <div class="panel-title">
+        <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseLayers"  aria-expanded="true" aria-controls="collapseLayers"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="panel-label">Layer Visibility</span></a>
+        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLayers"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+      </div>
+    </div>
+    <div id="collapseLayers" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLayers">
+      <div class="panel-body">
+
+			<div id="layersDiv"></div>
+
+      </div>
+    </div>
+    </div>
+
+
+    <!-- Opacity panel -->
+    <div id="panelOpacity" class="panel collapse">
+    <div id="headingOpacity" class="panel-heading" role="tab">
+      <div class="panel-title">
+        <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseOpacity"  aria-expanded="true" aria-controls="collapseOpacity"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="panel-label">Layer Opacity</span></a>
+        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelOpacity"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+      </div>
+    </div>
+    <div id="collapseOpacity" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOpacity">
+      <div class="panel-body">
+        <div id="opacitySlider"></div>
+      </div>
+    </div>
+    </div>
+
+
+
+    <!-- Basemaps Panel -->
+    <div id="panelBasemaps" class="panel collapse">
+      <div id="headingBasemaps" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false"   aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
+        <div class="panel-body">
+          <select id="selectBasemapPanel" class="form-control">
+            <option value="streets" data-vector="streets-vector">Streets</option>
+            <option value="satellite" data-vector="satellite">Satellite</option>
+            <option value="hybrid" data-vector="hybrid">Hybrid</option>
+            <option value="national-geographic" data-vector="national-geographic">National Geographic</option>
+            <option value="topo" data-vector="topo-vector" selected="">Topographic</option>
+            <option value="gray" data-vector="gray-vector">Gray</option>
+            <option value="dark-gray" data-vector="dark-gray-vector">Dark Gray</option>
+            <option value="osm" data-vector="osm">Open Street Map</option>
+            <option value="dark-gray" data-vector="streets-night-vector">Streets Night</option>
+            <option value="streets" data-vector="streets-navigation-vector">Streets Mobile</option>
+            <option value="terrain" data-vector="terrain">Terrain</option>
+            <option value="ustopo" data-vector="ustopo">USGS Topo</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Results panel -->
+    <div id="panelResults" class="panel collapse">
+    <div id="headingResults" class="panel-heading" role="tab">
+      <div class="panel-title">
+        <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseResults"  aria-expanded="true" aria-controls="collapseResults"><span class="glyphicon glyphicon-list" aria-hidden="true"></span><span class="panel-label">Layer Results</span></a>
+        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelResults"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+      </div>
+    </div>
+    <div id="collapseResults" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingResults">
+      <div class="panel-body">
+
+	 <!-- custom content here -->
+
+      </div>
+    </div>
+    </div>
+
+
+
+
+	<div id="panelSettings" class="panel panel-map collapse">
+      <div id="headingSettings" class="panel-heading">
+        <div class="panel-title">
+          <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseSettings"
+            data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseSettings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="panel-label">Settings</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSettings"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseSettings" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSettings">
+        <div class="panel-body">
+          <div class="form-horizontal">
+
+
+            <!-- Color -->
+
+            <div class="form-group">
+              <label for="settingsColor" class="col-xs-3 control-label">Color</label>
+              <div class="col-xs-9">
+                <select id="settingsColor" class="form-control">
+                  <option value="" data-theme="calcite-theme-light">Calcite Default</option>
+                  <option value="calcite-bgcolor-dark-blue" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Blue</option>
+                  <option value="calcite-bgcolor-dark-green" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Green</option>
+                  <option value="calcite-bgcolor-dark-brown" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Brown </option>
+                  <option value="calcite-bgcolor-dark-red" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Dark Red</option>
+                  <option value="calcite-bgcolor-darkest-grey" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Darkest Grey</option>
+                  <option value="calcite-bgcolor-lightest-grey" data-textcolor="calcite-text-dark" data-bgcolor="calcite-bg-custom">Calcite Lightest Grey</option>
+                  <option value="calcite-bgcolor-blue-75" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Blue 75%</option>
+                  <option value="calcite-bgcolor-black-75" data-textcolor="calcite-text-light" data-bgcolor="calcite-bg-custom">Calcite Black 75%</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Widgets -->
+
+            <div class="form-group">
+              <label for="settingsWidgets" class="col-xs-3 control-label">Widgets</label>
+              <div class="col-xs-9">
+                <select id="settingsWidgets" class="form-control">
+                  <option value="calcite-widgets-dark">Calcite Dark</option>
+                  <option value="calcite-widgets-light" selected>Calcite Light</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Layout -->
+
+            <div class="form-group">
+              <label for="settingsLayout" class="col-xs-3 control-label">Layout</label>
+              <div class="col-xs-9">
+                <select id="settingsLayout" class="form-control">
+                  <option value="calcite-nav-top" data-nav="navbar-fixed-top" selected>Top</option>
+                  <option value="calcite-nav-bottom" data-nav="navbar-fixed-bottom">Bottom</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Panel - Share -->
+    <div id="panelShare" class="panel collapse">
+      <div id="headingShare" class="panel-heading">
+        <div class="panel-title">
+        <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseShare" aria-expanded="false" aria-controls="collapseShare"><span class="glyphicon glyphicon-share" aria-hidden="true"></span><span class="panel-label">Share</span></a>
+        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelShare"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseShare" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingShare">
+        <div class="panel-body">
+          <iframe src="https://platform.twitter.com/widgets/tweet_button.html?size=l&url=https%3A%2F%2Fgeology.utah.gov&via=ugstwitter&related=twitterapi%2Ctwitter&text=Check%20out%20this%20great%20interactive%20map%20from%20the%20UGS&hashtags=utahgeologicalsurvey"
+            width="140" height="28" title="Twitter Tweet Button" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fgeology.utah.gov&layout=button_count&size=large&mobile_iframe=true&width=105&height=28&appId"
+            width="105" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+          <p class="sharetext">Copy/paste the URL below to share this map via email, web browser, text editor, etc.</p>
+          <textarea class="textarea"> </textarea>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div> <!-- /.calcite-panels -->
+
+  <script type="text/javascript">
+    var dojoConfig = {
+      packages: [{
+        name: "bootstrap",
+        location: "https://esri.github.io/calcite-maps/dist/vendor/dojo-bootstrap"
+      },
+      {
+        name: "calcite-maps",
+        location: "https://esri.github.io/calcite-maps/dist/js/dojo"
+      }]
+    };
+  </script>
+
+  <!-- ArcGIS JS 4.0 -->
+  <script src="https://js.arcgis.com/4.5/"></script>
+
+  <script>
+
+      var app;
+      app = {
+        scale: 4600000,
+        center: "-111.3, 39.4",
+        basemap: "topo",
+        initialExtent: null,
+        tilt: null,
+        mview: "scene",
+        panels: "collapseInfo",
+        viewPadding: {
+          top: 50, bottom: 0
+        },
+        uiPadding: {
+          top: 15, bottom: 15
+        },
+        activeView: null,			// default view: map or scene
+        searchWidgetNav: null
+      };
+      //console.log(app)
+  </script>
+
+  <script src="/apps/_ugsmaptemplate/ugstemplate.js"></script>
+
+  <!-- put custom app js file here -->
+  <script src="ugsproject.js"></script>
+
+
+
+  <!-- Bootstrap core JavaScript
+
+  (if you need more access to jquery ui or bootstrap classes, delete the dojo loader and add refs here
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery (for Bootstrap's JavaScript plugins). NOTE: You can also use pure Dojo. See examples. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all  plugins or individual files as needed
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  -->
+
+  <!--
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  -->
+
+   <!-- Calcite Maps
+  <script src="../../dist/js/jquery/calcitemaps-v0.3.js"></script>    -->
+
+
+    <link rel="stylesheet" href="/apps/_ugsmaptemplate/template-rangeslider.css" />
+
+
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+/*   UGS boilerplate template for calcite   */
+
+
+.calcite-title:before{
+   content: url('logo_main.png');
+   padding:6px 12px 0 2px;
+   cursor: pointer;
+}
+
+.calcite-title-main a{
+  color: #fff;
+  font-size: 22px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/*   without this scalebar overlaps docked popup window in mobile
+   another solution would be .esri-popup__main-container{z-index:100;}   */
+.esri-scale-bar__line {
+  z-index:1 !important;
+}
+
+/*   without this popups sometimes go IN FRONT of the calcite panel-body
+    which some may like, but it looks wonky  */
+.calcite-panels.panel-group {
+  z-index:99 !important;
+}
+
+
+/*
+.esri-popup__main-container {
+  background-color: #333;
+  color: #ffffff;
+}
+.esri-popup-renderer__content-element {
+    padding: 0;
+}
+.esri-popup-renderer__content-element {
+    background-color: #333;
+    color: #fff;
+}
+.esri-search-result-renderer__more-results-item {
+    margin-bottom: 0px !important;
+    background-color: #333;
+    color: white;
+}
+.esri-search-result-renderer__more-results-list{
+    margin-top: 0px !important;
+    background-color: #333;
+    color: white;
+    border-top: 1px solid #333;
+}
+.esri-popup > .esri-popup__pointer-direction {
+    background-color: #fff;
+}
+.esri-popup__pointer-direction {
+    background-color: #fff;
+}
+.esri-layer-list__item-container {
+  color: #ffffff;
+}
+.esri-icon-left-triangle-arrow {
+  color: #ffffff;
+}
+.esri-widget table tr td, .esri-widget table tr th {
+background-color: #333;
+color: #ffffff;
+}
+.esri-widget table tr a,.esri-widget table tr a:hover {
+    color: #fff;
+}
+*/
+
+
+.esri-legend {
+    background-color: #333;
+    color: #ffffff;
+}
+#collapseLegend {
+    padding:20px;
+}
+
+/* these scrollbar rules are hacks,
+not supported in most browsers  */
+#collapseLegend::-webkit-scrollbar {
+    width: 1em;
+}
+#collapseLegend::-webkit-scrollbar-track {
+    color:#333;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+/* down and right arrows in the layer list   */
+.esri-layer-list .esri-icon-down-arrow {
+  color: #ffffff;
+}
+.esri-layer-list .esri-icon-right-triangle-arrow {
+  color: #ffffff;
+}
+.esri-layer-list__item-container {
+  background-color: #333;
+  color: #ffffff;
+}
+
+
+.esri-print__advanced-options-section {
+    background-color: #333;
+}
+.ugs-watermark {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    height: 42px;
+    width: 128px;
+    z-index: 1;
+    cursor: pointer;
+    background-image: url(ugs-logo.png);
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+
+.sharetext {
+    text-align: justify;
+    font-size:110%;
+    margin-top:15px;
+}
+/*  style 'share link' text  */
+.textarea {
+    color: #ccc;
+    font-family: 'Corbel Regular';
+    font-size: 110% !important;
+    overflow: auto;
+    resize: none;
+    width: 98%;
+    height: 90px;
+    margin: 5px;
+    background-color: #515151 !important;
+}
+/*  style the jquery slider  */
+.ui-slider .ui-slider-handle {
+    border: none !important;
+    border-radius: 50%;
+    background: #e19496 !important;
+    width: 18px !important;
+    height: 18px !important;
+    top: -5px !important;
+    z-index: 1000;
+    -ms-touch-action: none;
+    cursor: pointer !important;
+}
+
+/*  unless you want to reference claro.css, you must add ALL these slider rules  */

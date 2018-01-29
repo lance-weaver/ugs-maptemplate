@@ -1,0 +1,138 @@
+/*   from https://ajax.googleapis.com/ajax/libs/dojo/1.8/dojox/form/resources/RangeSlider.css     */
+
+.dojoxRangeSlider .dijitSliderLeftBumper, .dojoxRangeSlider .dijitSliderBottomBumper  {
+    background:#FFFFFF !important;
+}
+.dojoxRangeSliderBarContainer {
+    position:relative;
+}
+.dojoxRangeSlider .dijitSliderProgressBarV {
+    position:relative !important;
+}
+.dojoxRangeSlider .dijitSliderProgressBar {
+    overflow:hidden;
+    cursor:pointer;
+
+}
+.dojoxRangeSlider .dijitSliderProgressBarV {
+    position:absolute !important;
+    border-width: 0px;
+}
+.dojoxRangeSlider .dijitSliderImageHandleH {
+	left: -50%;
+}
+.dijitSlider .dojoxRangeSliderBarContainer .dijitSliderProgressBarH,
+.dojoxRangeSlider .dijitSliderMoveableH {
+        right:auto !important;
+}
+
+
+
+/*   from claro.css     */
+
+.dijitSliderImageHandle {
+    margin: 0;
+    padding: 0;
+    position: relative !important;
+    border: none !important;
+    border-radius: 50%;
+    background: #2F77AC;       /*     Color of the handles     */
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/*    prevent blue box on handle when in focus     */
+.dijitSliderImageHandle:focus {
+	outline: none;
+}
+.dijitSliderImageHandleH {
+    left: 50%;
+    top: -5px;
+    vertical-align: top;
+}
+.dijitSliderTopBumper, .dijitSliderRightBumper {
+    background-color: white;
+    /* HIDE STRANGE SIDE BUMPERS  */
+    display:none;
+}
+.dijitSliderBottomBumper, .dijitSliderLeftBumper {
+    background-color: white;
+    /* HIDE STRANGE SIDE BUMPERS  */
+    display:none;
+}
+.dijitSliderBumperH {
+    width: 8px;
+    height: 4px;
+    border-width: 1px 0;
+}
+.dijitSliderBumper {
+    overflow: hidden;
+    z-index: 1;
+}
+.dijitSliderMoveableH {
+    right: 0;
+}
+.dijitSliderMoveable {
+    z-index: 10;
+    position: absolute !important;
+    display: block;
+    vertical-align: middle;
+}
+.dijitSliderProgressBarH {
+    position: absolute !important;
+    width: 0;
+    vertical-align: middle;
+    overflow: visible;
+}
+.dijitSliderProgressBar {
+    background-color: #F7F7F7;     /*  COLOR OF BAR BEFORE HANDLE */
+    z-index: 1;
+}
+.dijitSliderRemainingBar {
+    overflow: hidden;
+    background-color: #ccc;    /*  COLOR OF BAR AFTER HANDLE */
+    z-index: 1;
+}
+.dijitSliderBar {
+    border-style: solid;
+    border-color: #cccccc;     /*  BORDER COLOR */
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.dijitSliderRemainingBarH {
+    width: 100% !important;
+}
+
+.dijitSliderBarH {
+  /*  HEIGHT OF BAR BEFORE & AFTER HANDLE */
+    height: 8px;
+    border-width: 1px 0;
+}
+.dijitSliderBarContainerH {
+    position: relative;
+    z-index: 1;
+}
+.dijitReset {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    line-height: normal;
+    color: inherit;
+}
+.dijitSliderButtonContainer {
+    text-align: center;
+    height: 0;
+}
+.dijitSliderButtonInner {
+  display:none;
+}
+.dijitSliderDecorationH {
+    width: 100%;
+}
+.dijitSliderDecoration {
+    text-align: center;
+}
